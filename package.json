@@ -1,0 +1,25 @@
+{
+  "name": "salesforce-outbound-msg-to-hangouts-chat",
+  "version": "1.0.0",
+  "description": "This Google Cloud Function takes Salesforce Outbound Messages and forwards them to a (given) Hangouts Chat webhook with formatting applied.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ejangi/salesforce-outbound-msg-to-hangouts-chat.git"
+  },
+  "author": "James Angus <james@ejangi.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ejangi/salesforce-outbound-msg-to-hangouts-chat/issues"
+  },
+  "homepage": "https://github.com/ejangi/salesforce-outbound-msg-to-hangouts-chat#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
