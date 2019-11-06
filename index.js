@@ -98,7 +98,7 @@ function processNotifications(notifications, hangoutsUrl) {
         }
 
         if (notification['EnterpriseUrl'] !== undefined) {
-            url = notification['EnterpriseUrl'][0];
+            url = notification['EnterpriseUrl'][0].replace(/\/services\/Soap\/c\/[0-9\.]+\/[a-zA-Z0-9]{15,18}/g, '');
         }
 
         note = notification['Notification'][0]['sObject'][0];
@@ -155,7 +155,6 @@ function formatHangoutsChatCard(msg) {
     let title = 'Salesforce Record',
         subtitle = 'Record',
         id = '',
-        url = '',
         fields = [];
 
     if (msg.Name !== undefined) title = msg.Name;
@@ -195,7 +194,7 @@ function formatHangoutsChatCard(msg) {
                                 "text": "OPEN IN SALESFORCE",
                                 "onClick": {
                                 "openLink": {
-                                    "url": "https://ap5.lightning.force.com/lightning/r/sObject/" + id + "/view"
+                                    "url": msg.url + "/lightning/r/sObject/" + id + "/view"
                                 }
                                 }
                             }
