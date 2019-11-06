@@ -6,10 +6,6 @@
 
 ### 1. Deploy this function:
 
-[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
-
-OR:
-
 ```
 gcloud functions deploy salesforceOutboundMessagesToHangoutsChat --trigger-http --allow-unauthenticated --runtime nodejs10 --region asia-northeast1
 ```
