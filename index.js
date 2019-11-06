@@ -14,8 +14,11 @@ const request = require('request'),
  */
 exports.salesforceOutboundMessagesToHangoutsChat = (req, res) => {
     let url = decodeURIComponent(req.query.url),
-        xml = Buffer.from(req.body, 'base64').toString(),
-        body = xmlParser.parseStringPromise(xml)
+        xml = Buffer.from(req.body, 'base64').toString();
+
+    if (url == undefined || xml == undefined) res.status(400).send('Bad Request');
+
+    let body = xmlParser.parseStringPromise(xml)
         .then((result) => {
             processNotifications(result, url);
         })
@@ -167,7 +170,7 @@ function formatHangoutsChatCard(msg) {
         fields.push({
             "keyValue" : {
                 "topLabel": key.replace(/([A-Z])/g, ' $1'),
-                "content": msg[key]
+                "content": formatField(msg[key], key)
             }
         });
     });
@@ -209,4 +212,28 @@ function formatHangoutsChatCard(msg) {
     };
       
     return card;
+}
+
+
+
+/**
+ * Format Salesforce fields for output
+ * 
+ * @param {String} field 
+ */
+function formatField(field, key) {
+    // Detect dates:
+    if (field.match(/^([0-9]{4})-([0-9]{2})-([0-9]{2})/)) {
+        let d = new Date(field);
+        return d.toString();
+    }
+
+    // Detect decimals:
+    if (field.match(/^([0-9]+)(\.)([0-9]+)/)) {
+        let n = field.replace(/\.([0-9]{1})$/, '.$10');
+        n = n.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return n;
+    }
+
+    return field;
 }
