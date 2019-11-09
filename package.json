@@ -1,6 +1,6 @@
 {
   "name": "salesforce-outbound-msg-to-hangouts-chat",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "This Google Cloud Function takes Salesforce Outbound Messages and forwards them to a (given) Hangouts Chat webhook with formatting applied.",
   "main": "index.js",
   "directories": {
